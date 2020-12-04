@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <div class="form-group">
+            <select class="form-control" name="symbol" id="symbol" onchange="stockSell()">
+                <option disabled="" selected="" value="" shares="0">Symbol</option>
+                {% for stock in stocks %}
+                <option label="{{ stock.symbol }}" value="{{ stock.shares }}">{{ stock.symbol }}</option>
+                {% endfor %}
+            </select>
+            <input autocomplete="off" class="form-control" id="shares" max="???" min="0" name="shares" placeholder="Shares" type="number">
+            <button class="btn btn-primary" type="submit">Sell</button>
+            <input type="hidden" name="symbolValue" value="" id="symbolValue" />
+        </div>
+    </form>
+
+    <script>
+        function stockSell() {
+            var el = document.getElementById("symbol");
+            var shares = Number(el.value);
+            var symbol = el.options[el.selectedIndex].innerHTML;
+            document.getElementById("shares").max = shares;
+            document.getElementById("symbolValue").value = symbol;
+        }
+    </script>
+
+{% endblock %}

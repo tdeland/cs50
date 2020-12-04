@@ -1,0 +1,30 @@
+{% extends "quote.html" %}
+
+{% block quote %}
+    <div class="table">
+        <table class="table table-striped" id="quote" name="quote" diabled>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+            <tr>
+                <td>{{ symbol }}</td>
+                <td>{{ name }}</td>
+                <td>{{ price }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <form action="/buy" method="post">
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" id="shares" max="???" min="0" name="shares" placeholder="Shares" type="number">
+            <button class="btn btn-primary" type="submit">Buy</button>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById("shares").max = {{ max_shares }}
+    </script>
+
+{% endblock %}
